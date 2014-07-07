@@ -127,9 +127,10 @@ if ( $iis7_permalinks ) {
 		$writable = true;
 	else
 		$writable = false;
-} elseif ( $is_nginx ) {
+} elseif ( $is_nginx || $is_hhvm) {
 	$writable = false;
-} else {
+}
+else {
 	if ( ( ! file_exists( $home_path . '.htaccess' ) && is_writable( $home_path ) ) || is_writable( $home_path . '.htaccess' ) ) {
 		$writable = true;
 	} else {
@@ -159,7 +160,7 @@ if ( ! is_multisite() ) {
 			_e('Permalink structure updated. Remove write access on web.config file now!');
 		else
 			_e('Permalink structure updated.');
-	} elseif ( $is_nginx ) {
+	} elseif ( $is_nginx || $is_hhvm) {
 		_e('Permalink structure updated.');
 	} else {
 		if ( $permalink_structure && ! $usingpi && ! $writable && $update_required ) {
@@ -278,7 +279,7 @@ printf( __('If you like, you may enter custom structures for your category and t
 <p><?php _e('If you temporarily make your site&#8217;s root directory writable for us to generate the <code>web.config</code> file automatically, do not forget to revert the permissions after the file has been created.') ?></p>
 		<?php endif; ?>
 	<?php endif; ?>
-<?php elseif ( ! $is_nginx ) :
+<?php elseif ( ! $is_nginx  && ! $is_hhvm) :
 	if ( $permalink_structure && ! $usingpi && ! $writable && $update_required ) : ?>
 <p><?php _e('If your <code>.htaccess</code> file were <a href="http://codex.wordpress.org/Changing_File_Permissions">writable</a>, we could do this automatically, but it isn&#8217;t so these are the mod_rewrite rules you should have in your <code>.htaccess</code> file. Click in the field and press <kbd>CTRL + a</kbd> to select all.') ?></p>
 <form action="options-permalink.php" method="post">

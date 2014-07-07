@@ -17,7 +17,7 @@
 
 global $pagenow,
 	$is_lynx, $is_gecko, $is_winIE, $is_macIE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone, $is_IE,
-	$is_apache, $is_IIS, $is_iis7, $is_nginx;
+	$is_apache, $is_IIS, $is_iis7, $is_nginx, $is_hhvm;
 
 // On which page are we ?
 if ( is_admin() ) {
@@ -102,6 +102,12 @@ $is_apache = (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache') !== false || strpos(
  * @global bool $is_nginx
  */
 $is_nginx = (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false);
+
+/**
+ * Whether the server software is HHVM or something else
+ * @global bool $is_hhvm
+ */
+$is_hhvm = (strpos($_SERVER['SERVER_SOFTWARE'], 'HPHP') !== false);
 
 /**
  * Whether the server software is IIS or something else
